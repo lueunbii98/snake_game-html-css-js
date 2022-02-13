@@ -1,5 +1,7 @@
 const CANVAS_BORDER_COLOUR = 'black';
 const CANVAS_BACKGROUND_COLOUR = 'white';
+const SNAKE_COLOUR = 'lightgreen';
+const SNAKE_BORDER_COLOUR = 'darkgreen';
 
 //Getting the canvas element
 var gameCanvas = document.getElementById('gameCanvas');
@@ -14,3 +16,28 @@ ctx.strokestyle = CANVAS_BORDER_COLOUR;
 //Setting a rectangle to the canvas
 ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+// Creating the snake
+let snake = [
+    {x: 150, y: 150},
+    {x: 140, y: 150},
+    {x: 130, y: 150},
+    {x: 120, y: 150},
+    {x: 110, y: 150}
+];
+
+// Drawing the snake
+function drawSnakePart(snakePart){
+    ctx.fillStyle = SNAKE_COLOUR;
+    ctx.strokestyle = SNAKE_BORDER_COLOUR;
+
+    ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+}
+
+//printing the snake
+function drawSnake(){
+    snake.forEach(drawSnakePart);
+}
+
+drawSnake();
