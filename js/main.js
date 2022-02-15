@@ -2,6 +2,8 @@ const CANVAS_BORDER_COLOUR = 'black';
 const CANVAS_BACKGROUND_COLOUR = 'white';
 const SNAKE_COLOUR = 'lightgreen';
 const SNAKE_BORDER_COLOUR = 'darkgreen';
+const FOOD_COLOUR = 'red';
+const FOOD_BORDER_COLOUR = 'darkred';
 
 //Getting the canvas element
 var gameCanvas = document.getElementById('gameCanvas');
@@ -29,6 +31,9 @@ let snake = [
     {x: 120, y: 150},
     {x: 110, y: 150}
 ];
+
+//score
+let score = 0;
 
 // Drawing the snake
 function drawSnakePart(snakePart){
@@ -84,6 +89,9 @@ function advanceSnake() {
 
     const didEatFood = snake[0].x === foodX && snake[0].y === foodY; //check if the head hits the food
     if(didEatFood){
+        score += 10;
+        document.getElementById('score').innerHTML = score;
+
         createFood();//generates new food
     } else {
         snake.pop();//delete the end of the array
@@ -129,8 +137,8 @@ function createFood(){ //generating the food
 
 //drawing the food
 function drawFood(){
-    ctx.fillStyle = 'red';
-    ctx.strokestyle = 'darkred';
+    ctx.fillStyle = FOOD_COLOUR;
+    ctx.strokestyle = FOOD_BORDER_COLOUR;
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
 }
