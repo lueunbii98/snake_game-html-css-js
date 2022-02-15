@@ -35,6 +35,17 @@ let snake = [
 //score
 let score = 0;
 
+//fisrt movement
+let dx = 10;
+let dy = 0;
+
+// food position
+let foodX;
+let foodY;
+
+// to avoid change the direction before the 100ms
+let changingDirection = false;
+
 // Drawing the snake
 function drawSnakePart(snakePart){
     ctx.fillStyle = SNAKE_COLOUR;
@@ -55,6 +66,10 @@ function changeDirection(event){
     const RIGHT_KEY = 39;
     const UP_KEY = 38;
     const DOWN_KEY = 40;
+
+    if (changingDirection) return;
+
+    changingDirection = true;
 
     const keyPressed = event.keyCode; // gets the key that trigger the event
     
@@ -98,15 +113,12 @@ function advanceSnake() {
     }
 }
 
-//fisrt movement
-let dx = 10;
-let dy = 0;
-
 //function to draw the next movement
 function main() {
     if(didGameEnd()) return;
-    
+
     setTimeout (function onTick(){ //set a delay when calling a function
+        changingDirection = false;
         clearCanvas();//clear the canvas 
         advanceSnake();//sets new coordinates
         drawSnake();//draw the snake
