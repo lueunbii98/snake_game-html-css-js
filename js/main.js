@@ -82,7 +82,12 @@ function advanceSnake() {
 
     snake.unshift(head);//add to the beggining of the array
 
-    snake.pop();//delete the end of the array
+    const didEatFood = snake[0].x === foodX && snake[0].y === foodY; //check if the head hits the food
+    if(didEatFood){
+        createFood();//generates new food
+    } else {
+        snake.pop();//delete the end of the array
+    }
 }
 
 //fisrt movement
@@ -130,6 +135,6 @@ function drawFood(){
     ctx.strokeRect(foodX, foodY, 10, 10);
 }
 
-drawSnake();
-createFood();
-main();
+drawSnake();//firstPosition
+createFood();//firstFood
+main();//beginMovement
