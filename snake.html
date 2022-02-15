@@ -5,11 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="score">0</div>
-    <canvas id="gameCanvas" width="300" height="300"></canvas><!--Allways specify the id on a canvas-->
-
+    <div class="game">
+        <div class="title">SNAKE GAME</div>
+        <div id="score">0</div>
+        <canvas id="gameCanvas" width="300" height="300"></canvas><!--Allways specify the id on a canvas-->
+        <div id="over"></div>
+    </div>
+    
     <!-- JS -->
     <script src="js/main.js"></script>
 </body>

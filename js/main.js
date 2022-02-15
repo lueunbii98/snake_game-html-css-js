@@ -115,7 +115,10 @@ function advanceSnake() {
 
 //function to draw the next movement
 function main() {
-    if(didGameEnd()) return;
+    if(didGameEnd()) {
+        document.getElementById('over').innerHTML = 'GAME OVER';
+        return;
+    }
 
     setTimeout (function onTick(){ //set a delay when calling a function
         changingDirection = false;
