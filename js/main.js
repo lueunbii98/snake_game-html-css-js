@@ -20,6 +20,7 @@ function clearCanvas(){
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
+/* SNAKE */
 // Creating the snake
 let snake = [
     {x: 150, y: 150},
@@ -91,9 +92,10 @@ let dy = 0;
 //function to draw the next movement
 function main() {
     setTimeout (function onTick(){ //set a delay when calling a function
-        clearCanvas();
-        advanceSnake();
-        drawSnake();
+        clearCanvas();//clear the canvas 
+        advanceSnake();//sets new coordinates
+        drawSnake();//draw the snake
+        drawFood();//drawing the food
 
         //calling itself
         main();
@@ -103,5 +105,31 @@ function main() {
 //works when a key is pressed
 document.addEventListener('keydown', changeDirection);
 
+/* FOOD */
+
+function randomTen(min, max){ //generate a random number in an interval
+    return Math.round((Math.random() * (max-min) + min) / 10) * 10
+}
+
+function createFood(){ //generating the food
+    foodX = randomTen(0, gameCanvas.width - 10); //generating a random x and y
+    foodY = randomTen(0, gameCanvas.height - 10);
+
+    snake.forEach(function isFoodOnSnake(part){ //for the array of the snake
+        const foodIsOnSnake = part.x == foodX && part.y == foodY;
+        if (foodIsOnSnake) //evaluates if the random numbers are the same of the snake position
+            createFood(); //then call itself to try again
+    });
+}
+
+//drawing the food
+function drawFood(){
+    ctx.fillStyle = 'red';
+    ctx.strokestyle = 'darkred';
+    ctx.fillRect(foodX, foodY, 10, 10);
+    ctx.strokeRect(foodX, foodY, 10, 10);
+}
+
 drawSnake();
+createFood();
 main();
