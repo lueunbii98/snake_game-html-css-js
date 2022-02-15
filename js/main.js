@@ -40,4 +40,24 @@ function drawSnake(){
     snake.forEach(drawSnakePart);
 }
 
+// Moving the snake
+function advanceSnake() {
+    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+
+    snake.unshift(head);
+
+    snake.pop();
+}
+
+//test
+let dx = 10;
+let dy = 0;
+
+advanceSnake();
+
+dx = 0;
+dy = -10;
+
+advanceSnake();
+
 drawSnake();
