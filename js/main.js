@@ -9,13 +9,18 @@ var gameCanvas = document.getElementById('gameCanvas');
 //Getting the context to draw
 var ctx = gameCanvas.getContext('2d');
 
-//Stting the colors for the canvas
-ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-ctx.strokestyle = CANVAS_BORDER_COLOUR;
+clearCanvas();
 
-//Setting a rectangle to the canvas
-ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+// function to draw the canvas
+function clearCanvas(){
+    //Stting the colors for the canvas
+    ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
+    ctx.strokestyle = CANVAS_BORDER_COLOUR;
+
+    //Setting a rectangle to the canvas
+    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+    ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+}
 
 // Creating the snake
 let snake = [
