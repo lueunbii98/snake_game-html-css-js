@@ -9,8 +9,6 @@ var gameCanvas = document.getElementById('gameCanvas');
 //Getting the context to draw
 var ctx = gameCanvas.getContext('2d');
 
-clearCanvas();
-
 // function to draw the canvas
 function clearCanvas(){
     //Stting the colors for the canvas
@@ -58,11 +56,16 @@ function advanceSnake() {
 let dx = 10;
 let dy = 0;
 
-advanceSnake();
+function main() {
+    setTimeout (function onTick(){ //set a delay when calling a function
+        clearCanvas();
+        advanceSnake();
+        drawSnake();
 
-dx = 0;
-dy = -10;
-
-advanceSnake();
+        //calling itself
+        main();
+    }, 100);
+}
 
 drawSnake();
+main();
