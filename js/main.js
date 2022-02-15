@@ -104,6 +104,8 @@ let dy = 0;
 
 //function to draw the next movement
 function main() {
+    if(didGameEnd()) return;
+    
     setTimeout (function onTick(){ //set a delay when calling a function
         clearCanvas();//clear the canvas 
         advanceSnake();//sets new coordinates
@@ -141,6 +143,24 @@ function drawFood(){
     ctx.strokestyle = FOOD_BORDER_COLOUR;
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
+}
+
+//function to check if the snake collide with itself or the canvas border
+function didGameEnd(){
+    //evaluating if the snake collide with itself
+    for (let i = 4; i < snake.length; i++){//beggin with 4 'cause its imposible to collide with the first 3 parts of the snake
+        const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y; //check the position of the head and every part of the body
+        
+        if (didCollide) return true;
+    }
+
+    //evaluating if the snake collide with a border
+    const hitLeftWall = snake[0].x < 0;
+    const hitRightWall = snake[0].x > gameCanvas.width - 10;
+    const hitTopWall = snake[0].y < 0;
+    const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+
+    return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall
 }
 
 drawSnake();//firstPosition
